@@ -1,0 +1,852 @@
+/* Contenedor principal del formulario */
+.formulario {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo sutil en el borde */
+.formulario::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+  animation: shimmer 3s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0%, 100% { 
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(100%);
+  }
+}
+
+/* Estilo del formulario */
+.formulario-style {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Campo del formulario */
+.formulario-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+/* Etiquetas */
+.formulario-campo label {
+  color: #e5e5e5;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+/* Inputs */
+.formulario-campo input {
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(5px);
+  position: relative;
+}
+
+/* Placeholder styling */
+.formulario-campo input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  transition: opacity 0.3s ease;
+}
+
+/* Input focus */
+.formulario-campo input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #fbbf24;
+  box-shadow: 
+    0 0 0 3px rgba(251, 191, 36, 0.2),
+    0 8px 25px rgba(251, 191, 36, 0.1);
+  transform: translateY(-2px);
+}
+
+.formulario-campo input:focus::placeholder {
+  opacity: 0.7;
+  transform: translateX(5px);
+}
+
+/* Input hover */
+.formulario-campo input:hover {
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Input válido */
+.formulario-campo input:valid {
+  border-color: rgba(34, 197, 94, 0.6);
+}
+
+.formulario-campo input:valid:focus {
+  border-color: #22c55e;
+  box-shadow: 
+    0 0 0 3px rgba(34, 197, 94, 0.2),
+    0 8px 25px rgba(34, 197, 94, 0.1);
+}
+
+/* Input inválido */
+.formulario-campo input:invalid:not(:placeholder-shown) {
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+.formulario-campo input:invalid:not(:placeholder-shown):focus {
+  border-color: #ef4444;
+  box-shadow: 
+    0 0 0 3px rgba(239, 68, 68, 0.2),
+    0 8px 25px rgba(239, 68, 68, 0.1);
+}
+
+/* Efecto de etiqueta flotante cuando el input tiene valor */
+.formulario-campo input:focus + label,
+.formulario-campo input:not(:placeholder-shown) + label {
+  color: #fbbf24;
+  transform: translateY(-2px);
+}
+
+/* Efecto especial para input de fecha */
+.formulario-campo input[type="date"] {
+  color-scheme: dark;
+}
+
+.formulario-campo input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.formulario-campo input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  background-color: rgba(251, 191, 36, 0.2);
+}
+
+/* Animación de aparición del formulario */
+.formulario {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efecto de loading/processing */
+.formulario-campo input:focus {
+  position: relative;
+}
+
+.formulario-campo input:focus::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+  border-radius: 1px;
+  animation: loadingBar 2s infinite;
+}
+
+@keyframes loadingBar {
+  0%, 100% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formulario {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .formulario-style {
+    gap: 1.25rem;
+  }
+  
+  .formulario-campo input {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .formulario-campo label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario {
+    margin: 0.5rem;
+    padding: 1.25rem;
+  }
+  
+  .formulario-campo input {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Estados adicionales para mejor UX */
+.formulario-campo {
+  position: relative;
+}
+
+/* Indicador de campo requerido */
+.formulario-campo label::after {
+  content: ' *';
+  color: #ef4444;
+  font-weight: bold;
+}
+
+/* Efecto de éxito en campos completados correctamente */
+.formulario-campo input:valid:not(:focus) {
+  background: rgba(34, 197, 94, 0.05);
+}
+
+/* Transiciones suaves para todos los elementos */
+.formulario-campo * {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto de partículas de fondo (sutil) */
+.formulario::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(251, 191, 36, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== Boton de enviar ===== */
+
+/* Contenedor del botón */
+.boton-enviar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  position: relative;
+}
+
+/* Botón principal */
+.boton-enviar button {
+  position: relative;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #1a1a1a;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  box-shadow: 
+    0 8px 25px rgba(251, 191, 36, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  min-width: 200px;
+}
+
+/* Efecto de brillo interno */
+.boton-enviar button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+/* Efecto de ondas al hacer hover */
+.boton-enviar button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+/* Estados hover */
+.boton-enviar button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 12px 35px rgba(251, 191, 36, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+}
+
+.boton-enviar button:hover::before {
+  left: 100%;
+}
+
+.boton-enviar button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Estado activo/pressed */
+.boton-enviar button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 
+    0 6px 20px rgba(251, 191, 36, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #92400e 100%);
+}
+
+/* Estado focus para accesibilidad */
+.boton-enviar button:focus {
+  outline: none;
+  box-shadow: 
+    0 8px 25px rgba(251, 191, 36, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 0 3px rgba(251, 191, 36, 0.4);
+}
+
+/* Efecto de loading/procesando */
+.boton-enviar button.loading {
+  pointer-events: none;
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%);
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.boton-enviar button.loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estado deshabilitado */
+.boton-enviar button:disabled {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.boton-enviar button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animación de entrada */
+.boton-enviar {
+  animation: slideInUp 0.8s ease-out 0.3s both;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efecto de éxito */
+.boton-enviar button.success {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  color: #ffffff;
+  animation: successPulse 0.6s ease;
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Efecto de error */
+.boton-enviar button.error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+  color: #ffffff;
+  animation: errorShake 0.6s ease;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .boton-enviar button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+  
+  .boton-enviar {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .boton-enviar button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    min-width: 160px;
+    border-radius: 40px;
+  }
+  
+  .boton-enviar {
+    margin-top: 1.25rem;
+  }
+}
+
+/* Efecto de partículas al hacer click */
+.boton-enviar button.clicked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+  }
+}
+
+/* Sombra ambiental adicional */
+.boton-enviar::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 80%;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(251, 191, 36, 0.2) 0%, transparent 70%);
+  transform: translateX(-50%);
+  filter: blur(8px);
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.boton-enviar:hover::before {
+  width: 90%;
+  height: 25px;
+  background: radial-gradient(ellipse, rgba(251, 191, 36, 0.3) 0%, transparent 70%);
+}
+
+/* Texto con efecto de resplandor */
+.boton-enviar button {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.boton-enviar button:hover {
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+/* ===== Boton de limpiar ===== */
+
+/* Contenedor del botón limpiar */
+.boton-limpiar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  position: relative;
+}
+
+/* Botón principal limpiar */
+.boton-limpiar button {
+  position: relative;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  box-shadow: 
+    0 8px 25px rgba(59, 130, 246, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  min-width: 200px;
+}
+
+/* Efecto de brillo interno */
+.boton-limpiar button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+/* Efecto de ondas al hacer hover */
+.boton-limpiar button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+/* Estados hover */
+.boton-limpiar button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 12px 35px rgba(59, 130, 246, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+}
+
+.boton-limpiar button:hover::before {
+  left: 100%;
+}
+
+.boton-limpiar button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Estado activo/pressed */
+.boton-limpiar button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 
+    0 6px 20px rgba(59, 130, 246, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 50%, #1e3a8a 100%);
+}
+
+/* Estado focus para accesibilidad */
+.boton-limpiar button:focus {
+  outline: none;
+  box-shadow: 
+    0 8px 25px rgba(59, 130, 246, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+/* Efecto de loading/procesando */
+.boton-limpiar button.loading {
+  pointer-events: none;
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%);
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.boton-limpiar button.loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Estado deshabilitado */
+.boton-limpiar button:disabled {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.boton-limpiar button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animación de entrada con delay */
+.boton-limpiar {
+  animation: slideInUp 0.8s ease-out 0.5s both;
+}
+
+/* Efecto de éxito */
+.boton-limpiar button.success {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  color: #ffffff;
+  animation: successPulse 0.6s ease;
+}
+
+/* Efecto de limpiar completado */
+.boton-limpiar button.cleaned {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
+  color: #ffffff;
+  animation: cleanedSweep 0.8s ease;
+}
+
+@keyframes cleanedSweep {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.05) rotate(-2deg); }
+  75% { transform: scale(1.05) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Efecto de error */
+.boton-limpiar button.error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+  color: #ffffff;
+  animation: errorShake 0.6s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .boton-limpiar button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+  
+  .boton-limpiar {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .boton-limpiar button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    min-width: 160px;
+    border-radius: 40px;
+  }
+  
+  .boton-limpiar {
+    margin-top: 1rem;
+  }
+}
+
+/* Efecto de partículas al hacer click */
+.boton-limpiar button.clicked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+
+/* Sombra ambiental adicional */
+.boton-limpiar::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 80%;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+  transform: translateX(-50%);
+  filter: blur(8px);
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.boton-limpiar:hover::before {
+  width: 90%;
+  height: 25px;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+}
+
+/* Texto con efecto de resplandor */
+.boton-limpiar button {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.boton-limpiar button:hover {
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Estilos para contenedor de ambos botones ===== */
+
+/* Contenedor principal que contiene ambos botones */
+.botones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Responsive para botones lado a lado en pantallas grandes */
+@media (min-width: 640px) {
+  .botones-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .boton-enviar,
+  .boton-limpiar {
+    margin-top: 0;
+  }
+}
+
+/* Ajustes cuando están juntos */
+@media (min-width: 640px) {
+  .boton-enviar button,
+  .boton-limpiar button {
+    min-width: 180px;
+  }
+}
+
+/* Efecto de interacción entre botones */
+.botones-container:hover .boton-enviar button:not(:hover) {
+  filter: brightness(0.9);
+  transform: scale(0.98);
+}
+
+.botones-container:hover .boton-limpiar button:not(:hover) {
+  filter: brightness(0.9);
+  transform: scale(0.98);
+}
+
+/* Animación especial cuando se limpia el formulario */
+@keyframes clearForm {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.form-clearing {
+  animation: clearForm 0.8s ease;
+}
+
+/* Efecto de confirmación para el botón limpiar */
+.boton-limpiar button.confirm-clear {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  animation: confirmPulse 1s ease infinite;
+}
+
+@keyframes confirmPulse {
+  0%, 100% { 
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+  }
+  50% { 
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+  }
+}

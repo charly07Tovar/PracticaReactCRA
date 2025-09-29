@@ -4,6 +4,10 @@ import './index.css';
 import './style/Navbar.css';
 import './style/Footer.css';
 import './style/Titulos.css';
+import './style/Formulario.css';
+import './style/TablaRegistros.css';
+import './style/style.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
